@@ -105,9 +105,40 @@ class _RegisterPageState extends State<RegisterPage> {
                     .headline5!
                     .copyWith(color: lightTextColor),
               ),
-
+            const SizedBox(
+              height: 25,
+            ),
+            Stack(
+              children: [
+                const CircleAvatar(
+                  radius: 64,
+                  backgroundImage: NetworkImage(
+                      'https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png'),
+                  backgroundColor: Colors.black,
+                ),
+                Positioned(
+                  bottom: -10,
+                  left: 80,
+                  child: IconButton(
+                    onPressed: () => authController.pickImage(),
+                    icon: const Icon(
+                      Icons.add_a_photo,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+          
               //name textField
-
+              EntryField(
+                controller: _name,
+                textCapitalization: TextCapitalization.words,
+                label: 'User Name',
+                keyboardType: TextInputType.emailAddress,
+              ),
               EntryField(
                 controller: _email,
                 textCapitalization: TextCapitalization.words,

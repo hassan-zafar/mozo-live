@@ -28,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     profileController.updateUserId(widget.uid);
+    print(currentUser);
   }
 
   @override
@@ -163,39 +164,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           const SizedBox(
                             height: 15,
-                          ),       Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  CustomTextButton(
-                                      paddingHor: 6,
-                                      paddingVert: 6,
-                                      fontSize: 8,
-                                      borderRadius: borderRadius,
-                                      onTap: () async {
-                                        await PaymentService()
-                                            .makePayment(context, '9');
-                                      },
-                                      isGradient: true,
-                                      text: 'Premium Membership for 9\$'),
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => CommentsNChat(
-                                            chatId: currentUser!.uid,
-                                            chatNotificationToken: 'aasd', ),
-                                      ));
-                                    },
-                                    child: Icon(
-                                      Icons.message_outlined,
-                                      color: lightTextColor,
-                                      size: 18,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              CustomTextButton(
+                                  paddingHor: 6,
+                                  paddingVert: 6,
+                                  fontSize: 8,
+                                  borderRadius: borderRadius,
+                                  onTap: () async {
+                                    await PaymentService()
+                                        .makePayment(context, '9');
+                                  },
+                                  isGradient: true,
+                                  text: 'Premium Membership for 9\$'),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => CommentsNChat(
+                                      chatId: currentUser!.uid,
+                                      chatNotificationToken: 'aasd',
                                     ),
-                                  )
-                                ],
-                              ),
-                           
+                                  ));
+                                },
+                                child: Icon(
+                                  Icons.message_outlined,
+                                  color: lightTextColor,
+                                  size: 18,
+                                ),
+                              )
+                            ],
+                          ),
+
                           Container(
                             width: 140,
                             height: 47,

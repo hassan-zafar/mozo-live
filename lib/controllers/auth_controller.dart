@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mozolive/Constants/collections.dart';
 import 'package:mozolive/Constants/constants.dart';
 import 'package:mozolive/DatabaseMethods/local_database.dart';
 import 'package:mozolive/DatabaseMethods/user_api.dart';
@@ -35,6 +37,7 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => const WelcomescreenWidget());
     } else {
+      fetchUserInfoFromFirebase(uid: user.uid);
       Get.offAll(() => const HomeScreen());
     }
   }
@@ -77,16 +80,16 @@ class AuthController extends GetxController {
         );
         String downloadUrl = await _uploadToStorage(image);
         model.AppUserModel user = model.AppUserModel(
-          name: username,
-          email: email,
-          uid: cred.user!.uid,
-          profilePhoto: downloadUrl,isAdmin: false
-        );
+            name: username,
+            email: email,
+            uid: cred.user!.uid,
+            profilePhoto: downloadUrl,
+            isAdmin: false);
         await firestore
             .collection('users')
             .doc(cred.user!.uid)
-            .set(user.toJson()).then((value) => currentUser=user);
-
+            .set(user.toJson())
+            .then((value) => currentUser = user);
       } else {
         Get.snackbar(
           'Error Creating Account',
@@ -102,7 +105,7 @@ class AuthController extends GetxController {
   }
 
   Future<User?> loginUser(String email, String password) async {
-      try {
+    try {
       final UserCredential result = await firebaseAuth
           .signInWithEmailAndPassword(
         email: email.trim(),
@@ -122,6 +125,23 @@ class AuthController extends GetxController {
       CustomToast.errorToast(message: signUpError.toString());
       return null;
     }
+  }
+
+  Future<AppUserModel> fetchUserInfoFromFirebase({
+    required String uid,
+  }) async {
+    final DocumentSnapshot _user = await userRef.doc(uid).get();
+    currentUser = AppUserModel.fromDocument(_user);
+    createToken(uid);
+    return currentUser!;
+  }
+
+  createToken(String uid) {
+    FirebaseMessaging.instance.getToken().then((token) {
+      userRef.doc(uid).update({
+        "androidNotificationToken": token,
+      });
+    });
   }
 
   void signOut() async {
