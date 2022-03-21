@@ -71,8 +71,8 @@ class ProfileController extends GetxController {
       'following': following.toString(),
       'isFollowing': isFollowing,
       'likes': likes.toString(),
-      'profilePhoto': currentUser!.profilePhoto,
-      'name': currentUser!.name,
+      'profilePhoto': profilePhoto,
+      'name': name,
       'thumbnails': thumbnails,
     };
     update();

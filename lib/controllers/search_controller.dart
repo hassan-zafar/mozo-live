@@ -16,19 +16,20 @@ class SearchController extends GetxController {
         .map((QuerySnapshot query) {
       List<AppUserModel> retVal = [];
       for (var elem in query.docs) {
-        retVal.add(AppUserModel.fromSnap(elem));
+        retVal.add(AppUserModel.fromDocument(elem));
       }
       return retVal;
     }));
   }
-  allUsers() async {
+  
+   allUsers() async {
     _searchedUsers.bindStream(firestore
         .collection('users')
         .snapshots()
         .map((QuerySnapshot query) {
       List<AppUserModel> retVal = [];
       for (var elem in query.docs) {
-        retVal.add(AppUserModel.fromSnap(elem));
+        retVal.add(AppUserModel.fromDocument(elem));
       }
       return retVal;
     }));

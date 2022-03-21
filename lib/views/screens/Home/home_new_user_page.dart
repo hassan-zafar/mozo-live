@@ -1,16 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mozolive/Components/custom_button_inter.dart';
 import 'package:mozolive/Theme/colors.dart';
 import 'package:mozolive/Theme/constants.dart';
+import 'package:mozolive/controllers/search_controller.dart';
+import 'package:mozolive/models/user.dart';
 
-class HomeNewUserFollowPage extends StatefulWidget {
-  const HomeNewUserFollowPage({Key? key}) : super(key: key);
+class HomeNewUserFollowPage extends StatelessWidget {
+  HomeNewUserFollowPage({Key? key}) : super(key: key);
 
-  @override
-  _HomeNewUserFollowPageState createState() => _HomeNewUserFollowPageState();
-}
-
-class _HomeNewUserFollowPageState extends State<HomeNewUserFollowPage> {
+  final SearchController searchController = Get.put(SearchController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,105 +36,63 @@ class _HomeNewUserFollowPageState extends State<HomeNewUserFollowPage> {
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             ),
-            Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(borderRadius: borderRadius),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/video 2.png',
-                          fit: BoxFit.cover,
-                          color: Colors.black45,
-                          colorBlendMode: BlendMode.darken,
-                          height: 380,
-                          width: 280,
+            Obx(
+              () {
+                searchController.allUsers();
+                return Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index) {
+                      AppUserModel user = searchController.searchedUsers[index];
+                      print(user.profilePhoto);
+                      return Container(
+                        decoration: BoxDecoration(borderRadius: borderRadius),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: user.profilePhoto,
+                              fit: BoxFit.cover,
+                              color: Colors.black45,
+                              colorBlendMode: BlendMode.darken,
+                              height: 380,
+                              width: 280,
+                            ),
+                            Positioned(
+                              bottom: 160,
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: CachedNetworkImageProvider(
+                                        user.profilePhoto),
+                                  ),
+                                  Text(
+                                    user.name,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline5!
+                                        .copyWith(color: lightTextColor),
+                                  ),
+                                  CustomTextButtonIntr(
+                                      height: 50,
+                                      width: 150,
+                                      onTap: () {},
+                                      fontSize: 16,
+                                      isGradient: true,
+                                      text: 'Follow'),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        Positioned(
-                          bottom: 160,
-                          child: Column(
-                            children: [
-                              const CircleAvatar(
-                                backgroundImage:
-                                    AssetImage('assets/user/user1.png'),
-                              ),
-                              Text(
-                                'Designstudio',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .copyWith(color: lightTextColor),
-                              ),
-                              Text(
-                                'Hello, my name is pat s..',
-                                style: Theme.of(context).textTheme.subtitle1,
-                              ),
-                              CustomTextButtonIntr(
-                                  height: 50,
-                                  width: 150,
-                                  onTap: () {},
-                                  fontSize: 16,
-                                  isGradient: true,
-                                  text: 'Subscribe'),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
+                    itemCount: searchController.searchedUsers.length,
                   ),
-                  Container(
-                    decoration: BoxDecoration(borderRadius: borderRadius),
-                    margin: EdgeInsets.fromLTRB(20, 8, 20, 8),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/video 2.png',
-                          fit: BoxFit.cover,
-                          color: Colors.black45,
-                          colorBlendMode: BlendMode.darken,
-                          height: 380,
-                          width: 280,
-                        ),
-                        Positioned(
-                          bottom: 160,
-                          child: Column(
-                            children: [
-                              const CircleAvatar(
-                                backgroundImage:
-                                    AssetImage('assets/user/user1.png'),
-                              ),
-                              Text(
-                                'Designstudio',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline5!
-                                    .copyWith(color: lightTextColor),
-                              ),
-                              Text(
-                                'Hello, my name is pat s..',
-                                style: Theme.of(context).textTheme.subtitle1,
-                              ),
-                              CustomTextButtonIntr(
-                                  height: 50,
-                                  width: 150,
-                                  onTap: () {},
-                                  fontSize: 16,
-                                  isGradient: true,
-                                  text: 'Subscribe'),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                );
+              },
+            )
           ],
         ),
       ),

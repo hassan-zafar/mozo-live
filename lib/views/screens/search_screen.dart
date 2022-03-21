@@ -16,7 +16,7 @@ class SearchScreen extends StatelessWidget {
     return Obx(() {
       return SafeArea(
         child: Scaffold(
-             appBar: PreferredSize(
+          appBar: PreferredSize(
             preferredSize: const Size.fromHeight(120.0),
             child: Container(
               margin: const EdgeInsets.all(20.0),
@@ -27,23 +27,23 @@ class SearchScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(Utilities.borderRadius),
               ),
               child: TextField(
-                readOnly: true,onSubmitted:(value) => searchController.searchUser(value) ,
+                onSubmitted: (value) => searchController.searchUser(value),
                 // onTap: () => Navigator.pushNamed(context, PageRoutes.searchPage),
                 decoration: InputDecoration(
                   icon: Icon(Icons.search, color: secondaryColor),
                   border: InputBorder.none,
-                  hintText:'Search',
+                  hintText: 'Search',
                   hintStyle: Theme.of(context).textTheme.subtitle1,
                 ),
               ),
             ),
           ),
-        
           body: searchController.searchedUsers.isEmpty
               ? ListView.builder(
                   itemCount: searchController.searchedUsers.length,
                   itemBuilder: (context, index) {
-                    AppUserModel user = searchController.searchedUsers[index];
+                    AppUserModel user = searchController.allUsers()[index];
+                    print(user);
                     return InkWell(
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
@@ -67,7 +67,6 @@ class SearchScreen extends StatelessWidget {
                     );
                   },
                 )
-     
               : ListView.builder(
                   itemCount: searchController.searchedUsers.length,
                   itemBuilder: (context, index) {
