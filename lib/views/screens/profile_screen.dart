@@ -28,7 +28,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     profileController.updateUserId(widget.uid);
-    print(currentUser);
   }
 
   @override
