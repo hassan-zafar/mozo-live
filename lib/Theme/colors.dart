@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+Color buttonColor = Colors.red;
 Color backgroundColor = const Color(0xff0F0F16);
-Color mainColor = const Color(0xff065900);
-Color secondaryColor = const Color(0xffffc11f);
+Color mainColor = const Color(0xff0F0F16);
+Color secondaryColor = Colors.white;
 Color disabledTextColor = const Color(0xff6b717e);
 Color captionTextColor = const Color(0xffAEAEAE);
 Color lightTextColor = const Color(0xff4cffff);

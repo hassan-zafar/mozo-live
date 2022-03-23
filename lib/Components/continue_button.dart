@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mozolive/Locale/locale.dart';
 import 'package:mozolive/Theme/colors.dart';
 import 'package:mozolive/Theme/style.dart';
-
 class CustomButton extends StatelessWidget {
   final String? text;
   final Function? onPressed;
@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
   final Widget? icon;
   final Color? textColor;
 
-  const CustomButton(ImageIcon imageIcon, {
+  const CustomButton({
     Key? key,
     this.text,
     this.onPressed,
@@ -24,6 +24,7 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var locale = AppLocalizations.of(context);
     return Padding(
       padding: const EdgeInsets.only(top: 16.0),
       child: TextButton.icon(
@@ -39,7 +40,7 @@ class CustomButton extends StatelessWidget {
         icon: icon ?? const SizedBox.shrink(),
         onPressed: onPressed as void Function()?,
         label: Text(
-          text ?? 'Continue',
+          text ?? locale!.continueText!,
           style: style ??
               Theme.of(context)
                   .textTheme

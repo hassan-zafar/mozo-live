@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mozolive/Constants/constants.dart';
+import 'package:mozolive/Theme/colors.dart';
 import 'package:mozolive/views/widgets/custom_icon.dart';
 
 class HomeScreen extends StatefulWidget {

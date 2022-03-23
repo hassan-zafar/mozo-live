@@ -12,7 +12,6 @@ import 'package:mozolive/DatabaseMethods/user_api.dart';
 import 'package:mozolive/models/user.dart' as model;
 import 'package:mozolive/models/user.dart';
 import 'package:mozolive/views/screens/AuthNew/welcome.dart';
-import 'package:mozolive/views/screens/auth/login_screen.dart';
 import 'package:mozolive/views/screens/home_screen.dart';
 
 import '../utilities/custom_toast.dart';

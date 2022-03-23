@@ -53,6 +53,9 @@ dependencies:
   google_sign_in:
   get_storage:
   flutter_stripe:
+  flutter_svg:
+  flutter_phoenix:
+  file_picker:
 dev_dependencies:
 
   flutter_lints: ^1.0.0

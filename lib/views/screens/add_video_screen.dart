@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mozolive/Constants/constants.dart';
+import 'package:mozolive/Theme/colors.dart';
 import 'package:mozolive/views/screens/confirm_screen.dart';
 
 class AddVideoScreen extends StatelessWidget {

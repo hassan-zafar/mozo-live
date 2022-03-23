@@ -23,8 +23,6 @@ HomePage() ,
 ];
 
 // COLORS
-const backgroundColor = Colors.black;
-var buttonColor = Color(0xff065900);
 const borderColor = Colors.grey;
 
 // FIREBASE
