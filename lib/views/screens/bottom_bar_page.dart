@@ -3,14 +3,14 @@ import 'package:mozolive/Constants/constants.dart';
 import 'package:mozolive/Theme/colors.dart';
 import 'package:mozolive/views/widgets/custom_icon.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class BottomBarPage extends StatefulWidget {
+  const BottomBarPage({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<BottomBarPage> createState() => _BottomBarPageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _BottomBarPageState extends State<BottomBarPage> {
   int pageIdx = 0;
 
   @override
@@ -41,7 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.message, size: 30),
+            icon: Icon(Icons.data_saver_off, size: 30),
+            label: 'Shiftties',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications, size: 30),
             label: 'Messages',
           ),
           BottomNavigationBarItem(
