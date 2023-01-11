@@ -1,16 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:mozolive/Constants/constants.dart';
+import 'package:mozolive/controllers/profile_controller.dart';
 import 'package:mozolive/models/video.dart';
 
 class VideoController extends GetxController {
   final Rx<List<Video>> _videoList = Rx<List<Video>>([]);
+  final ProfileController profileController = Get.put(ProfileController());
 
   List<Video> get videoList => _videoList.value;
 
   @override
   void onInit() {
     super.onInit();
+    profileController.getUserData();
+    // getTrendingOrFollowing();
+  }
+
+  getTrending() {
     _videoList.bindStream(
         firestore.collection('videos').snapshots().map((QuerySnapshot query) {
       List<Video> retVal = [];
@@ -23,6 +30,23 @@ class VideoController extends GetxController {
     }));
   }
 
+  // getFollowing() {
+  //   _videoList.bindStream(firestore
+  //       .collection('videos')
+  //       .where(uid)
+  //       .snapshots()
+  //       .map((QuerySnapshot query) {
+  //     List<Video> retVal = [];
+  //     for (var element in query.docs) {
+  //       retVal.add(
+  //         Video.fromSnap(element),
+  //       );
+  //     }
+  //     return retVal;
+  //   }));
+  // }
+
+  getFollowing() {}
   likeVideo(String id) async {
     DocumentSnapshot doc = await firestore.collection('videos').doc(id).get();
     var uid = authController.user.uid;

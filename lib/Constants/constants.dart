@@ -6,11 +6,9 @@ import 'package:mozolive/controllers/auth_controller.dart';
 import 'package:mozolive/models/user.dart';
 import 'package:mozolive/views/screens/Activity/activity_page.dart';
 import 'package:mozolive/views/screens/Home/home_page.dart';
-import 'package:mozolive/views/screens/Shifts/shifts_follow_screen.dart';
 import 'package:mozolive/views/screens/add_video_screen.dart';
 import 'package:mozolive/views/screens/profile_screen.dart';
 import 'package:mozolive/views/screens/search_screen.dart';
-import 'package:mozolive/views/screens/video_screen.dart';
 
 AppUserModel? currentUser;
 String logo = 'assets/images/Logo_white.png';
@@ -18,7 +16,6 @@ List pages = [
   const HomePage(),
   SearchScreen(),
   const AddVideoScreen(),
-  const ShiftYouFollowScreen(),
   const ActivityPage(),
   ProfileScreen(uid: authController.user.uid),
 ];

@@ -41,12 +41,8 @@ class _BottomBarPageState extends State<BottomBarPage> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.data_saver_off, size: 30),
-            label: 'Shiftties',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.notifications, size: 30),
-            label: 'Messages',
+            label: 'Notifications',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person, size: 30),

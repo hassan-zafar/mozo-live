@@ -51,7 +51,7 @@ class ProfileController extends GetxController {
         .get();
     followers = followerDoc.docs.length;
     following = followingDoc.docs.length;
-
+    print(followingDoc.docs.first.id);
     firestore
         .collection('users')
         .doc(_uid.value)

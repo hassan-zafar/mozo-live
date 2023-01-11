@@ -47,7 +47,10 @@ class HomeNewUserFollowPage extends StatelessWidget {
                       AppUserModel user = searchController.searchedUsers[index];
                       print(user.profilePhoto);
                       return Container(
-                        decoration: BoxDecoration(borderRadius: borderRadius),
+                        margin: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          borderRadius: borderRadius,
+                        ),
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
@@ -77,7 +80,9 @@ class HomeNewUserFollowPage extends StatelessWidget {
                                   CustomTextButtonIntr(
                                       height: 50,
                                       width: 150,
-                                      onTap: () {},
+                                      onTap: ()async {
+                                       await searchController.followUser(user.uid);
+                                      },
                                       fontSize: 16,
                                       isGradient: true,
                                       text: 'Follow'),
